@@ -31,7 +31,7 @@ loadMoreBtnN.button.addEventListener('click', onFeachHits)
 function onSubmit(e){
     e.preventDefault()
     console.log('hi');
-    //  let inpValue = '';
+    let inpValue = '';
     galleryEl.innerHTML = '';
     const form = e.currentTarget;
     inpValue = form.searchQuery.value.trim();
