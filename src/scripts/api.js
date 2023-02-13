@@ -1,8 +1,8 @@
 // const URL = `https://pixabay.com/api/?key=33583832-ef5cd451b2a0e1292cdfe78fd&q=${query}&image_type=photo&orientation=horizontal&safesearch=true`
-console.log('eeeee')
+
 // export default class NewApiService {}
 function fetchGallery(query){
-    const URL = `https://pixabay.com/api/?key=33583832-ef5cd451b2a0e1292cdfe78fd&q=${query}&image_type=photo&orientation=horizontal&safesearch=true`;
+    const URL = `https://pixabay.com/api/?key=33583832-ef5cd451b2a0e1292cdfe78fd&q=${query}&image_type=photo&orientation=horizontal&safesearch=true&per_page=5&page=1`;
    return fetch(URL)
 .then((response) => response.json())
 // .then(({hits})=> console.log(hits))
