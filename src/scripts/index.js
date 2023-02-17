@@ -34,7 +34,7 @@ function onSubmit(e){
 
 
     const form = e.currentTarget;
-    inpValue = form.searchQuery.value.trim();
+    const inpValue = form.searchQuery.value.trim();
 
     newsApiService.query = inpValue;
 
