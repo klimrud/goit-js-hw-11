@@ -2,7 +2,7 @@ import '../styles.css';
 // import fetchGallery from './api.js'
 import NewsApiService from "./NewsApiService.js";
 import LoadMoreBtn from "./components/LoadMoreBtn.js";
- import Notiflix from 'notiflix';
+ import Notiflix, { Notify } from 'notiflix';
 //  import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import SimpleLightbox from "simplelightbox";
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -20,9 +20,6 @@ const loadMoreBtnN = new LoadMoreBtn({
   isHidden: true
 });
 
-// console.log(newsApiService);
-// console.log(loadMoreBtn);
-// console.log(loadMoreBtnN);
 
 formEl.addEventListener('submit', onSubmit);
 // loadMoreBtn.addEventListener('click', onFeachHits);
@@ -30,26 +27,34 @@ loadMoreBtnN.button.addEventListener('click', onFeachHits)
 
 function onSubmit(e){
     e.preventDefault()
+
     console.log('hi');
-    let inpValue = '';
-    galleryEl.innerHTML = '';
+    // let inpValue = '';
+    // galleryEl.innerHTML = '';
+
+
     const form = e.currentTarget;
     inpValue = form.searchQuery.value.trim();
+
     newsApiService.query = inpValue;
+
     newsApiService.resetPage();
-    clearNewsList();
+    clearNewsList(); 
     loadMoreBtnN.show();
     // console.log(inpValue);
-    console.log(form);
+    // console.log(form);
 
-    newsApiService.getGallery().then((hits)=> {
-        if(hits.length === 0) throw new Error('!!! Sorry, there are no images matching your search query. Please try again.')
-         console.log(hits);
-        return hits.reduce(
-            (markup, hit) => createMarkup(hit) + markup,
-             '');
-    }).then((markup) => {appendNewsToList(markup);})
-    .catch(onError)
+    // newsApiService.getGallery().then((hits)=> {
+    //     if(hits.length === 0) throw new Error('!!! Sorry, there are no images matching your search query. Please try again.')
+    //     //  console.log(hits);
+       
+    //     console.log('2')
+    //     return hits.reduce(
+    //         (markup, hit) => createMarkup(hit) + markup,
+    //          '');
+
+    // }).then((markup) => {appendNewsToList(markup);})
+    // .catch(onError)
     onFeachHits().finally(()=> form.reset());
 }
 
@@ -57,22 +62,45 @@ function onSubmit(e){
   loadMoreBtnN.disable();
 
   try{
-   const hits = await newsApiService.getGallery();
-   console.log(hits);
-   if(hits.length === 0) {//throw new Error('!!! Sorry, there are no images matching your search query. Please try again.')
-    Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')
-  }
-   const markup = hits.reduce(
-     (markup, hit) => createMarkup(hit) + markup,
-      '');
-      appendNewsToList(markup);
-     loadMoreBtnN.enable();
+   const data = await newsApiService.getGallery();
+   const hits = data.hits
+  
+   const totalHits = data.totalHits;
+   const totalHitsPage = newsApiService.per_page * (newsApiService.page - 1)
+   const totalPege = Math.ceil(totalHits / newsApiService.per_page);
+   console.log(totalHitsPage);
 
-  }
-  catch(err){
-    console.error(err);
-    Notiflix.Notify.failure('whoops')
-  }
+   if(hits.length === 0)throw new Error('!!! Sorry, there are no images matching your search query. Please try again.')
+   //   Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')
+   // }
+    const markup = hits.reduce(
+      (markup, hit) => createMarkup(hit) + markup,
+       '');
+       appendNewsToList(markup);
+      loadMoreBtnN.enable();
+
+     if(newsApiService.page <= totalPege){
+      Notiflix.Notify.success(`Hooray! We found ${totalHitsPage} images.`);
+     }
+
+    //  totalPege = Math.ceil(totalHits / newsApiService.per_page);
+     console.log(totalPege)
+   console.log(newsApiService.page)
+     if (newsApiService.page >= totalPege + 1){
+       console.log(newsApiService)
+       Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+       Notiflix.Notify.info("We're sorry, but you've reached the end of search results.")
+      }
+
+   
+  }catch(onError){
+     console.error(onError);
+     loadMoreBtnN.hide();
+     Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')
+    // Notiflix.Notify.info("We're sorry, but you've reached the end of search results.")
+  };
+
+ 
 
 //  return newsApiService.getGallery().then((hits)=> {
 //     if(hits.length === 0) throw new Error('!!! Sorry, there are no images matching your search query. Please try again.')
@@ -94,7 +122,7 @@ function appendNewsToList(markup){
 }
 
 function clearNewsList(){
- galleryEl.innerHTML = '';
+ galleryEl.innerHTML = '';   //очищаем
 }
 
 // function updateNewsList(markup){

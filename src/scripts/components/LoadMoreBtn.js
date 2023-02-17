@@ -1,7 +1,7 @@
 export default class LoadMoreBtn {
     constructor ({selector, isHidden}){
      this.button = this.getButton(selector);
-     if (isHidden ) this.hide();
+     if (isHidden) this.hide();
      else this.show();
      }
 
@@ -21,13 +21,9 @@ export default class LoadMoreBtn {
    }
    enable(){
     this.button.disabled = false;
-    // console.log(this.per_page);
-    // console.log(this.page);
-    this.button.textContent = 'Load morre'
-    // this.button.textContent = `Hooray! We found ${totalHits} images.`;
+    this.button.textContent = 'Load more'
+    
    }
 
 }
 
-
-// "We're sorry, but you've reached the end of search results."

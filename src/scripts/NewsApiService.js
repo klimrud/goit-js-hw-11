@@ -24,7 +24,7 @@ export default class NewsApiService {
  
     constructor(){
         this.page = 1;
-        this.per_page = 40;
+        this.per_page = 100;
         this.query = "";
     }
 
@@ -33,12 +33,13 @@ export default class NewsApiService {
         const res = await axios.get(
           `${ENDPOINT}?key=${ApiKEY}&q=${this.query}&${OPTIONS}&per_page=${this.per_page}&page=${this.page}`
         );
-        const hits = await res.data.hits;
-  
+        const data = await res.data;
+       
         this.nextPage();
-        return hits;
+        return data ;
       } catch (error) {
-        console.log(error.message);
+          Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
+        console.log(error.message);//выводит когда закончились картинки
       }
     }
 
@@ -58,13 +59,9 @@ export default class NewsApiService {
 // }
 nextPage(){
   this.page += 1;
-  // console.log(totalHits/this.per_page);
-  //       if (this.page > totalHits/this.per_page){
-  //         Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
-  //       }
 }
 
 resetPage(){
-    this.page = 1;
+    this.page = 1;  //скидываем страницу
 }
 }

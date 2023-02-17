@@ -22,7 +22,7 @@
     display: flex;
     filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.15));
     justify-content: center;
-    background-color: #B8AD88;
+    background-color: #b8ad88 ;
     height: 50px;
   }
 
@@ -51,7 +51,7 @@
     background-color: #094528;
     padding: 8px 12px;
     color: #EFEEE5;
-    border: 1px solid rgba(11, 50, 77, 0.9);
+    border: 1px solid rgba(15, 77, 11, 0.9);
     cursor: pointer;
 
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -71,6 +71,7 @@
   button:focus {
     background-color: #B8AD88;
     filter: drop-shadow(0px 2px 2px rgba(11, 50, 77, 0.9));
+    color: #094528;
   }
   .gallery {
     margin-top: 10px;
@@ -83,6 +84,7 @@
 
   .photo-card {
     width: 30%;
+    height: 100%;
     text-align: center;
     border-radius: 5px;
     background-color: #B8AD88;
@@ -90,6 +92,13 @@
     border: 1px solid  rgba(11, 50, 77, 0.9);
 
   }
+
+.photo-card:hover,
+.photo-card:focus {
+ border: 4px #EFEEE5;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+    1px 4px 6px rgba(0, 0, 0, 0.16);
+}
 
   img {
     width: 100%;
@@ -101,6 +110,7 @@
     align-items: baseline;
     justify-content: center;
     width: 100%;
+    
   }
 
   .info-item {
@@ -112,11 +122,11 @@
     gap: 5px;
     align-content: space-around;
     font-style: normal;
-  font-size: 10px;
+   font-size: 10px;
    line-height: 1.14;
-  letter-spacing: 0.03em;
+   letter-spacing: 0.03em;
    margin-left: 5px;
-margin-right: 5px;
+   margin-right: 5px;
   }
 #load-more {
   width: 150px;
@@ -136,3 +146,20 @@ margin-right: 5px;
   fill: currentColor;
 background-color: #212121;
 } */
+
+.icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  /* width: 1em;
+  height: 1em; */
+  stroke-width: 0;
+   stroke: currentColor;
+  /* fill: currentColor;  */
+  fill: #efeee5
+}
+
+.icon:focus,
+.icon:hover{
+  fill: #094528;
+}
