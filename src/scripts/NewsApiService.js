@@ -24,7 +24,7 @@ export default class NewsApiService {
  
     constructor(){
         this.page = 1;
-        this.per_page = 100;
+        this.per_page = 40;
         this.query = "";
     }
 
