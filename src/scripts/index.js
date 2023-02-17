@@ -6,7 +6,7 @@ import LoadMoreBtn from "./components/LoadMoreBtn.js";
 //  import { Notify } from 'notiflix/build/notiflix-notify-aio'
 import SimpleLightbox from "simplelightbox";
 import 'simplelightbox/dist/simple-lightbox.min.css';
-
+// import axios from 'axios';
 
 
 
@@ -20,9 +20,9 @@ const loadMoreBtnN = new LoadMoreBtn({
   isHidden: true
 });
 
-console.log(newsApiService);
-console.log(loadMoreBtn);
-console.log(loadMoreBtnN);
+// console.log(newsApiService);
+// console.log(loadMoreBtn);
+// console.log(loadMoreBtnN);
 
 formEl.addEventListener('submit', onSubmit);
 // loadMoreBtn.addEventListener('click', onFeachHits);
@@ -42,30 +42,48 @@ function onSubmit(e){
     // console.log(inpValue);
     console.log(form);
 
-    // newsApiService.getGallery().then((hits)=> {
-    //     if(hits.length === 0) throw new Error('!!! Sorry, there are no images matching your search query. Please try again.')
-    //      console.log(hits);
-    //     return hits.reduce(
-    //         (markup, hit) => createMarkup(hit) + markup,
-    //          '');
-    // }).then((markup) => {appendNewsToList(markup);})
-    // .catch(onError)
+    newsApiService.getGallery().then((hits)=> {
+        if(hits.length === 0) throw new Error('!!! Sorry, there are no images matching your search query. Please try again.')
+         console.log(hits);
+        return hits.reduce(
+            (markup, hit) => createMarkup(hit) + markup,
+             '');
+    }).then((markup) => {appendNewsToList(markup);})
+    .catch(onError)
     onFeachHits().finally(()=> form.reset());
 }
 
-function onFeachHits(){
+ async function onFeachHits(){
   loadMoreBtnN.disable();
 
- return newsApiService.getGallery().then((hits)=> {
-    if(hits.length === 0) throw new Error('!!! Sorry, there are no images matching your search query. Please try again.')
-     console.log(hits);
-    return hits.reduce(
-        (markup, hit) => createMarkup(hit) + markup,
-         '');
-}).then((markup) => {
-  appendNewsToList(markup);
-  loadMoreBtnN.enable();
-}).catch(onError)
+  try{
+   const hits = await newsApiService.getGallery();
+   console.log(hits);
+   if(hits.length === 0) {//throw new Error('!!! Sorry, there are no images matching your search query. Please try again.')
+    Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')
+  }
+   const markup = hits.reduce(
+     (markup, hit) => createMarkup(hit) + markup,
+      '');
+      appendNewsToList(markup);
+     loadMoreBtnN.enable();
+
+  }
+  catch(err){
+    console.error(err);
+    Notiflix.Notify.failure('whoops')
+  }
+
+//  return newsApiService.getGallery().then((hits)=> {
+//     if(hits.length === 0) throw new Error('!!! Sorry, there are no images matching your search query. Please try again.')
+//      console.log(hits);
+//     return hits.reduce(
+//         (markup, hit) => createMarkup(hit) + markup,
+//          '');
+// }).then((markup) => {
+//   appendNewsToList(markup);
+//   loadMoreBtnN.enable();
+// }).catch(onError)
 
 }
 

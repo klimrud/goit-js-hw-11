@@ -21,10 +21,13 @@ export default class LoadMoreBtn {
    }
    enable(){
     this.button.disabled = false;
-    console.log(this.per_page);
-    console.log(this.page);
+    // console.log(this.per_page);
+    // console.log(this.page);
     this.button.textContent = 'Load morre'
     // this.button.textContent = `Hooray! We found ${totalHits} images.`;
    }
 
 }
+
+
+// "We're sorry, but you've reached the end of search results."
