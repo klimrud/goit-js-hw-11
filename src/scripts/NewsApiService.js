@@ -2,7 +2,7 @@
   // const axios = require('axios').default;
 //  const axios = require('axios/dist/node/axios.cjs');
 
-console.log('eeeee')
+// console.log('eeeee')
 
  const ENDPOINT = `https://pixabay.com/api/`;
   const ApiKEY = `33583832-ef5cd451b2a0e1292cdfe78fd` 

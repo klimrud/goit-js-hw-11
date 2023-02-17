@@ -28,7 +28,7 @@ loadMoreBtnN.button.addEventListener('click', onFeachHits)
 function onSubmit(e){
     e.preventDefault()
 
-    console.log('hi');
+    // console.log('hi');
     // let inpValue = '';
     // galleryEl.innerHTML = '';
 
@@ -68,7 +68,7 @@ function onSubmit(e){
    const totalHits = data.totalHits;
    const totalHitsPage = newsApiService.per_page * (newsApiService.page - 1)
    const totalPege = Math.ceil(totalHits / newsApiService.per_page);
-   console.log(totalHitsPage);
+  //  console.log(totalHitsPage);
 
    if(hits.length === 0)throw new Error('!!! Sorry, there are no images matching your search query. Please try again.')
    //   Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')
@@ -84,10 +84,10 @@ function onSubmit(e){
      }
 
     //  totalPege = Math.ceil(totalHits / newsApiService.per_page);
-     console.log(totalPege)
-   console.log(newsApiService.page)
+        // console.log(totalPege)
+        // console.log(newsApiService.page)
      if (newsApiService.page >= totalPege + 1){
-       console.log(newsApiService)
+      //  console.log(newsApiService)
        Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
        Notiflix.Notify.info("We're sorry, but you've reached the end of search results.")
       }
