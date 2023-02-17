@@ -10,16 +10,6 @@
   const OPTIONS =
   `image_type=photo&orientation=horizontal&safesearch=true`
 
-//  const options = {
-//   
-//     // params: {
-//     // "q": `${this.query}`,
-//     // "image_type": 'photo',
-//     // "orientation": 'horizontal',
-//     // "safesearch": "true",
-//   },
-// };
-// console.log(options)
 export default class NewsApiService {
  
     constructor(){
