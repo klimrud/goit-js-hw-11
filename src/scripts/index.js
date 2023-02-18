@@ -73,7 +73,7 @@ function onSubmit(e){
    if(hits.length === 0)throw new Error('!!! Sorry, there are no images matching your search query. Please try again.')
    //   Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.')
    // }
-   
+
     const markup = hits.reduce(
       (markup, hit) => createMarkup(hit) + markup,
        '');
@@ -81,7 +81,7 @@ function onSubmit(e){
       loadMoreBtnN.enable();
 
      if(newsApiService.page <= totalPege){
-      Notiflix.Notify.success(`Hooray! We found ${totalHitsPage} images.`);
+      Notiflix.Notify.success(`Hooray! We found ${totalHitsPage} out of ${totalHits} images.`);
      }
 
     //  totalPege = Math.ceil(totalHits / newsApiService.per_page);
