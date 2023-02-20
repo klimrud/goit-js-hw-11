@@ -24,11 +24,10 @@ export default class NewsApiService {
           `${ENDPOINT}?key=${ApiKEY}&q=${this.query}&${OPTIONS}&per_page=${this.per_page}&page=${this.page}`
         );
         const data = await res.data;
-       
+
         this.nextPage();
         return data ;
       } catch (error) {
-          Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
         console.log(error.message);//выводит когда закончились картинки
       }
     }
@@ -55,3 +54,5 @@ resetPage(){
     this.page = 1;  //скидываем страницу
 }
 }
+
+

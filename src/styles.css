@@ -24,6 +24,12 @@
     justify-content: center;
     background-color: #b8ad88 ;
     height: 50px;
+    top: 0;
+    min-width:100%;
+    position:fixed;
+    overflow-y:scroll;
+    overflow-x:hidden;
+
   }
 
   input {
@@ -53,7 +59,7 @@
     color: #EFEEE5;
     border: 1px solid rgba(15, 77, 11, 0.9);
     cursor: pointer;
-
+     
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   }
@@ -74,7 +80,7 @@
     color: #094528;
   }
   .gallery {
-    margin-top: 10px;
+    margin-top: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -97,11 +103,17 @@
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
 
+
+
+ /* img:focus {
+  transform: scale(1.15);
+}  */
   img {
     width: 460px;
     height: 300px;
     border-radius: 5px;
-    object-fit: cover;
+    object-fit: cover; 
+    /* transition: transform 400ms ease-out; */
   }
 
   .info {
@@ -121,7 +133,7 @@
     gap: 5px;
     align-content: space-around;
     font-style: normal;
-   font-size: 10px;
+   font-size: 14px;
    line-height: 1.14;
    letter-spacing: 0.03em;
    margin-left: 5px;
@@ -151,3 +163,10 @@ object-fit: cover;
 .icon:hover{
   fill: #094528;
 }
+
+/* .fixed-content {
+  min-height:100%;
+  position:fixed;
+  overflow-y:scroll;
+  overflow-x:hidden;
+}  */
